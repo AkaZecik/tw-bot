@@ -2,8 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="jquery.min.js"></script>
+    <script src="options.js"></script>
+    <title>TW-Bot - Options</title>
+    <style>
+        #options td + td {
+            width: 60px
+        }
+
+        input, select {
+            -ms-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            width: 100%
+        }
+    </style>
 </head>
 <body>
-<script src="options.js"></script>
+<table id="options">
+    <tbody>
+    <tr>
+        <td>
+            <label for="farming_label">Choose option to farm with:</label>
+        </td>
+        <td>
+            <select id="farming_label">
+                <option value="a">A</option>
+                <option value="b">B</option>
+                <option value="c">C</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="wall_max">Max wall level (0-20):</label>
+        </td>
+        <td>
+            <select id="wall_max"></select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="distance_max">Max distance:</label>
+        </td>
+        <td>
+            <input id="distance_max" type="number">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="click_time_min">Min click time (ms):</label>
+        </td>
+        <td>
+            <input id="click_time_min" type="number">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="click_time_max">Max click time (ms):</label>
+        </td>
+        <td>
+            <input id="click_time_max" type="number">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="farming_sleep_min">Min sleep time (min):</label>
+        </td>
+        <td>
+            <input id="farming_sleep_min" type="number">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="farming_sleep_max">Max sleep time (min):</label>
+        </td>
+        <td>
+            <input id="farming_sleep_max" type="number">
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <button id="save">Save settings</button>
+        </td>
+        <td>
+            <button id="reset">Restore settings</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="status_save"></div>
+        </td>
+        <td>
+            <div id="status_reset"></div>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
