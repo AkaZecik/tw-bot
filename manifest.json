@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "description": "TW Bot",
   "author": "AkaZecik",
+  "icons": {
+    "57": "images/tribal_wars_icon.png"
+  },
   "background": {
     "scripts": [
       "jquery.min.js",
@@ -12,6 +15,9 @@
   },
   "browser_action": {
     "default_title": "TW-Bot",
+    "default_icon": {
+      "57": "images/tribal_wars_icon.png"
+    },
     "default_popup": "popup.html"
   },
   "options_page": "options.html"
