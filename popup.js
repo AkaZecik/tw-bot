@@ -9,6 +9,7 @@ $(function () {
         $("#farming_sleep_min").val(settings["TW-Bot/farming_sleep_min"]);
         $("#farming_sleep_max").val(settings["TW-Bot/farming_sleep_max"]);
         $("#spy_required").prop("checked", settings["TW-Bot/spy_required"]);
+        $("#farming_order").val(settings["TW-Bot/farming_order"]);
     });
 
     let wall_max = $("#wall_max");

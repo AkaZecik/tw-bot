@@ -4,7 +4,7 @@ body {
 }
 
 #options td + td {
-    width: 60px
+    width: 90px
 }
 
 input, select {
