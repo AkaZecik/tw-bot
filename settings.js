@@ -9,9 +9,17 @@ let default_settings = {
 };
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    chrome.storage.local.get(default_settings, function (settings) {
-        sendResponse(settings);
-    });
+    if (message) {
+        if (message.name === "getSettings") {
+            chrome.storage.local.get(default_settings, function (settings) {
+                sendResponse(settings);
+            });
+        }
+
+        if (message.name === "getDefaultSettings") {
+            sendResponse(default_settings);
+        }
+    }
 
     return true;
 });

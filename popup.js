@@ -1,5 +1,5 @@
 $(function () {
-    chrome.runtime.sendMessage({message: "getSettings"}, function (settings) {
+    chrome.runtime.sendMessage({name: "getSettings"}, function (settings) {
         $("#farming_label").val(settings["TW-Bot/farming_label"]);
         $("#wall_max").val(settings["TW-Bot/wall_max"]);
         $("#distance_max").val(settings["TW-Bot/distance_max"]);
