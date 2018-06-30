@@ -9,9 +9,9 @@
   },
   "background": {
     "scripts": [
-      "jquery.min.js",
-      "settings.js",
-      "background.js"
+      "vendor/jquery.min.js",
+      "background/settings.js",
+      "background/background.js"
     ]
   },
   "browser_action": {
