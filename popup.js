@@ -1,5 +1,6 @@
 $(function () {
     chrome.runtime.sendMessage({name: "getSettings"}, function (settings) {
+        console.log(settings);
         $("#farming_label").val(settings["TW-Bot/farming_label"]);
         $("#wall_max").val(settings["TW-Bot/wall_max"]);
         $("#distance_max").val(settings["TW-Bot/distance_max"]);
@@ -7,6 +8,7 @@ $(function () {
         $("#click_time_max").val(settings["TW-Bot/click_time_max"]);
         $("#farming_sleep_min").val(settings["TW-Bot/farming_sleep_min"]);
         $("#farming_sleep_max").val(settings["TW-Bot/farming_sleep_max"]);
+        $("#spy_required").prop("checked", settings["TW-Bot/spy_required"]);
     });
 
     let wall_max = $("#wall_max");

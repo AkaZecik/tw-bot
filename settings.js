@@ -5,7 +5,8 @@ let default_settings = {
     "TW-Bot/click_time_min": 200,
     "TW-Bot/click_time_max": 400,
     "TW-Bot/farming_sleep_min": 15,
-    "TW-Bot/farming_sleep_max": 25
+    "TW-Bot/farming_sleep_max": 25,
+    "TW-Bot/spy_required": true
 };
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
