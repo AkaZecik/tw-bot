@@ -10,6 +10,7 @@
   "background": {
     "scripts": [
       "jquery.min.js",
+      "settings.js",
       "background.js"
     ]
   },
