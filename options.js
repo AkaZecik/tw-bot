@@ -1,18 +1,3 @@
-let default_settings = {
-    "TW-Bot/farming_label": "c",
-    "TW-Bot/wall_max": 2,
-    "TW-Bot/distance_max": 15,
-    "TW-Bot/click_time_min": 200,
-    "TW-Bot/click_time_max": 400,
-    "TW-Bot/farming_sleep_min": 15,
-    "TW-Bot/farming_sleep_max": 25
-};
-
-function validateSettings(settings) {
-    // TODO
-    return true;
-}
-
 $(function () {
     let wall_max = $("#wall_max");
 
@@ -22,7 +7,7 @@ $(function () {
 
     restoreSettings();
     $("#save").click(saveSettings);
-    $("#reset").click(revertDefaultSettings);
+    $("#reset").click(restoreDefaultSettings);
 });
 
 function saveSettings() {
@@ -33,12 +18,10 @@ function saveSettings() {
         "TW-Bot/click_time_min": $("#click_time_min").val(),
         "TW-Bot/click_time_max": $("#click_time_max").val(),
         "TW-Bot/farming_sleep_min": $("#farming_sleep_min").val(),
-        "TW-Bot/farming_sleep_max": $("#farming_sleep_max").val()
+        "TW-Bot/farming_sleep_max": $("#farming_sleep_max").val(),
+        "TW-Bot/spy_required": $("#spy_required").prop("checked"),
+        "TW-Bot/farming_order": $("#farming_order").val()
     };
-
-    if (!validateSettings(settings)) {
-        return;
-    }
 
     chrome.storage.local.set(settings, function () {
         $("#status_save").text("Saved");
@@ -50,25 +33,33 @@ function saveSettings() {
 }
 
 function restoreSettings() {
-    chrome.storage.local.get(default_settings, function (settings) {
-        $("#farming_label").val(settings["TW-Bot/farming_label"]);
-        $("#wall_max").val(settings["TW-Bot/wall_max"]);
-        $("#distance_max").val(settings["TW-Bot/distance_max"]);
-        $("#click_time_min").val(settings["TW-Bot/click_time_min"]);
-        $("#click_time_max").val(settings["TW-Bot/click_time_max"]);
-        $("#farming_sleep_min").val(settings["TW-Bot/farming_sleep_min"]);
-        $("#farming_sleep_max").val(settings["TW-Bot/farming_sleep_max"]);
+    chrome.runtime.sendMessage({name: "getSettings"}, function (settings) {
+        fillInForm(settings);
     });
 }
 
-function revertDefaultSettings() {
-    chrome.storage.local.set(default_settings, function () {
-        restoreSettings();
-        $("#status_reset").text("Reverted");
+function restoreDefaultSettings() {
+    chrome.runtime.sendMessage({name: "getDefaultSettings"}, function (defaultSettings) {
+        chrome.storage.local.set(defaultSettings, function () {
+            fillInForm(defaultSettings);
+            $("#status_reset").text("Reverted");
 
-        setTimeout(function () {
-            $("#status_reset").text("");
-        }, 1000);
+            setTimeout(function () {
+                $("#status_reset").text("");
+            }, 1000);
+        });
     });
+}
+
+function fillInForm(settings) {
+    $("#farming_label").val(settings["TW-Bot/farming_label"]);
+    $("#wall_max").val(settings["TW-Bot/wall_max"]);
+    $("#distance_max").val(settings["TW-Bot/distance_max"]);
+    $("#click_time_min").val(settings["TW-Bot/click_time_min"]);
+    $("#click_time_max").val(settings["TW-Bot/click_time_max"]);
+    $("#farming_sleep_min").val(settings["TW-Bot/farming_sleep_min"]);
+    $("#farming_sleep_max").val(settings["TW-Bot/farming_sleep_max"]);
+    $("#spy_required").prop("checked", settings["TW-Bot/spy_required"]);
+    $("#farming_order").val(settings["TW-Bot/farming_order"]);
 }
 
