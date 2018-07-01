@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <script src="vendor/jquery.min.js"></script>
+    <script src="utilities/injection.js"></script>
     <script src="popup.js"></script>
     <link rel="stylesheet" type="text/css" href="options.css">
     <style>
         html, body {
-            width: 320px;
+            width: 300px;
         }
 
         header {
@@ -30,7 +31,15 @@
         <tbody>
         <tr>
             <td>
-                <label for="farming_label">Choose option to farm with:</label>
+                <label for="farming_group">Group:</label>
+            </td>
+            <td>
+                <select id="farming_group"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="farming_label">Farming option:</label>
             </td>
             <td>
                 <select id="farming_label">
