@@ -15,7 +15,7 @@ function injectExtensionID(tabID, fnc) {
     });
 }
 
-function injectFile(tabID, fileName) {
+function injectFile(tabID, fileName, callback) {
     injectExtensionID(tabID, function () {
         chrome.tabs.executeScript(tabID, {
             code: `
@@ -26,11 +26,13 @@ function injectFile(tabID, fileName) {
                 };
                 (document.head || document.documentElement).appendChild(script);
             `
+        }, function () {
+            callback && callback();
         });
     });
 }
 
-function injectFunction(tabID, func) {
+function injectFunction(tabID, func, callback) {
     injectExtensionID(tabID, function () {
         chrome.tabs.executeScript(tabID, {
             code: `
@@ -41,6 +43,8 @@ function injectFunction(tabID, func) {
                 };
                 (document.head || document.documentElement).appendChild(script);
             `
+        }, function () {
+            callback && callback();
         });
     });
 }
