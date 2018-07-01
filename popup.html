@@ -27,100 +27,103 @@
 </header>
 <hr>
 <main>
-    <table id="options">
-        <tbody>
-        <tr>
-            <td>
-                <label for="farming_group">Group:</label>
-            </td>
-            <td>
-                <select id="farming_group"></select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="farming_label">Farming option:</label>
-            </td>
-            <td>
-                <select id="farming_label">
-                    <option value="a">A</option>
-                    <option value="b">B</option>
-                    <option value="c">C</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="wall_max">Max wall level (0-20):</label>
-            </td>
-            <td>
-                <select id="wall_max"></select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="distance_max">Max distance:</label>
-            </td>
-            <td>
-                <input id="distance_max" type="number">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="click_time_min">Min click time (ms):</label>
-            </td>
-            <td>
-                <input id="click_time_min" type="number">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="click_time_max">Max click time (ms):</label>
-            </td>
-            <td>
-                <input id="click_time_max" type="number">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="farming_sleep_min">Min sleep time (min):</label>
-            </td>
-            <td>
-                <input id="farming_sleep_min" type="number">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="farming_sleep_max">Max sleep time (min):</label>
-            </td>
-            <td>
-                <input id="farming_sleep_max" type="number">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="spy_required">Spy required</label>
-            </td>
-            <td>
-                <input id="spy_required" type="checkbox">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="farming_order">Farming order:</label>
-            </td>
-            <td>
-                <select id="farming_order">
-                    <option value="forward">Forward</option>
-                    <option value="backwards">Backwards</option>
-                </select>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <br>
-    <div style="text-align: center">
-        <button id="submit">Start farming</button>
+    <div id="loading">Loading...</div>
+    <div id="main" style="display: none;">
+        <table id="options">
+            <tbody>
+            <tr>
+                <td>
+                    <label for="farming_group">Group:</label>
+                </td>
+                <td>
+                    <select id="farming_group"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="farming_label">Farming option:</label>
+                </td>
+                <td>
+                    <select id="farming_label">
+                        <option value="a">A</option>
+                        <option value="b">B</option>
+                        <option value="c">C</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="wall_max">Max wall level (0-20):</label>
+                </td>
+                <td>
+                    <select id="wall_max"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="distance_max">Max distance:</label>
+                </td>
+                <td>
+                    <input id="distance_max" type="number">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="click_time_min">Min click time (ms):</label>
+                </td>
+                <td>
+                    <input id="click_time_min" type="number">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="click_time_max">Max click time (ms):</label>
+                </td>
+                <td>
+                    <input id="click_time_max" type="number">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="farming_sleep_min">Min sleep time (min):</label>
+                </td>
+                <td>
+                    <input id="farming_sleep_min" type="number">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="farming_sleep_max">Max sleep time (min):</label>
+                </td>
+                <td>
+                    <input id="farming_sleep_max" type="number">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="spy_required">Spy required</label>
+                </td>
+                <td>
+                    <input id="spy_required" type="checkbox">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="farming_order">Farming order:</label>
+                </td>
+                <td>
+                    <select id="farming_order">
+                        <option value="forward">Forward</option>
+                        <option value="backwards">Backwards</option>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <div style="text-align: center">
+            <button id="submit">Start farming</button>
+        </div>
     </div>
 </main>
 <hr>
