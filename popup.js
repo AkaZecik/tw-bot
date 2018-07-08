@@ -15,13 +15,17 @@ chrome.runtime.onMessageExternal.addListener(function (message, sender, sendResp
             $("#submit").click(function () {
                 let settings = collectSettings();
 
-                chrome.runtime.sendMessage({
-                    name: "startFarming",
-                    hostname: message.hostname,
-                    settings: settings
-                });
+                chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+                    chrome.runtime.sendMessage({
+                        name: "startFarming",
+                        hostname: message.hostname,
+                        settings: settings,
+                        tabID: tabs[0].id,
+                        groupID: $("#farming_group").val()
+                    });
 
-                window.close();
+                    window.close();
+                });
             });
 
             $("#loading").hide();
@@ -50,19 +54,20 @@ $(function () {
             wall_max.append($("<option value=\"" + i + "\">" + i + "</option>"));
         }
 
-        $("#go_to_options").click(function () {
-            chrome.runtime.openOptionsPage();
-        });
-
-        injectFunction(tabs[0].id, function () {
+        injectCode(tabs[0].id, `
             TribalWars.get("groups", {ajax: "load_groups"}, function (groups) {
-                chrome.runtime.sendMessage(TW_Bot_id, {
+                chrome.runtime.sendMessage("${chrome.runtime.id}", {
                     name: "getGameData",
                     groups: groups,
                     hostname: "https://" + window.location.hostname,
                     game_data: game_data
                 });
             });
-        });
+            `
+        );
+    });
+
+    $("#go_to_options").click(function () {
+        chrome.runtime.openOptionsPage();
     });
 });

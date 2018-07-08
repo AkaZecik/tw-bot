@@ -10,6 +10,8 @@
   "background": {
     "scripts": [
       "vendor/jquery.min.js",
+      "utilities/asynchronous_loop.js",
+      "utilities/injection.js",
       "background/settings.js",
       "background/background.js"
     ]
