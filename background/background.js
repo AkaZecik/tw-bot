@@ -1,8 +1,11 @@
 chrome.runtime.onMessageExternal.addListener(function (message, sender, sendResponse) {
     if (message) {
         if (message.name === "getVillagesFromGroup") {
-            console.log("yaaaay");
-            console.log(message.groups);
+            chrome.tabs.executeScript(sender.tab.id, {code: "chrome.runtime.id = \"" + chrome.runtime.id + "\";"}, function () {
+                chrome.tabs.executeScript(sender.tab.id, {code: "let settings = " + message.settings + ";"}, function () {
+                    chrome.tabs.executeScript(sender.tab.id, {file: "farmer.js"});
+                });
+            });
         }
     }
 });
@@ -28,6 +31,10 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                 );
                 `
             );
+        }
+
+        if (message.name === "finishedFarming") {
+            console.log("finished farming!!!");
         }
     }
 

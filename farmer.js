@@ -1,38 +1,34 @@
-chrome.runtime.onMessage(function (message, sender, sendResponse) {
-    if (message) {
-        if (message.name === "farm") {
-            console.log(message);
+$(function () {
+    console.log(chrome.runtime.id);
+    console.log(settings);
+    return;
 
-            $("a.farm_icon_a, a.farm_icon_b, a.farm_icon_c").click(function () {
-                $(this).closest("tr").remove();
+    $("a.farm_icon_a, a.farm_icon_b, a.farm_icon_c").click(function () {
+        $(this).closest("tr").remove();
+    });
+
+    let plunderList = [];
+    let plunderListHeader = $("table#plunder_list tr").eq(0);
+    let wallColumnID = plunderListHeader.find("th").index(plunderListHeader.find("th:has(img[src$=\"wall.png\"])"));
+    let distanceColumnID = plunderListHeader.find("th").index(plunderListHeader.find("th:has(img[src$=\"rechts.png\"])"));
+    let plunderListRows = $("table#plunder_list tr[id^=\"village_\"]");
+    let spies = $("#units_home #spy");
+
+    for (let i = 0; i < plunderListRows.length; i++) {
+        let plunderElement = plunderListRows.eq(i);
+        let wall = parseInt(plunderElement.find("td").eq(wallColumnID).text().trim());
+        let distance = parseFloat(plunderElement.find("td").eq(distanceColumnID).text().trim());
+
+        if (filter(wall, distance, settings)) {
+            plunderList.push({
+                iconA: plunderElement.find(".farm_icon_a"),
+                iconB: plunderElement.find(".farm_icon_b"),
+                iconC: plunderElement.find(".farm_icon_c")
             });
-
-            let plunderList = [];
-            let plunderListHeader = $("table#plunder_list tr").eq(0);
-            let wallColumnID = plunderListHeader.find("th").index(plunderListHeader.find("th:has(img[src$=\"wall.png\"])"));
-            let distanceColumnID = plunderListHeader.find("th").index(plunderListHeader.find("th:has(img[src$=\"rechts.png\"])"));
-            let plunderListRows = $("table#plunder_list tr[id^=\"village_\"]");
-            let spies = $("#units_home #spy");
-
-            for (let i = 0; i < plunderListRows.length; i++) {
-                let plunderElement = plunderListRows.eq(i);
-                let wall = parseInt(plunderElement.find("td").eq(wallColumnID).text().trim());
-                let distance = parseFloat(plunderElement.find("td").eq(distanceColumnID).text().trim());
-
-                if (filter(wall, distance, settings)) {
-                    plunderList.push({
-                        iconA: plunderElement.find(".farm_icon_a"),
-                        iconB: plunderElement.find(".farm_icon_b"),
-                        iconC: plunderElement.find(".farm_icon_c")
-                    });
-                }
-            }
-
-            farm(0, plunderList, spies, message.settings, sendResponse);
         }
     }
 
-    return true;
+    farm(0, plunderList, spies, message.settings);
 });
 
 function randomInterval(minTime, maxTime) {
@@ -61,7 +57,7 @@ function farm(i, plunderList, spies, settings, callback) {
             farm(i + 1, iterations);
         }, randomInterval(settings["TW_Bot/click_time_min"], settings["TW_Bot/click_time_max"]));
     } else {
-        callback && callback();
+        chrome.runtime.sendMessage({name: "finishedFarming"});
     }
 }
 
